@@ -5,20 +5,24 @@ from django.template import RequestContext
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from news.serializers import UserSerializer, GroupSerializer, NewsSerializer
-from models import News
+from news.models import News
 #from news.permissions import IsOwnerOrReadOnly
+from rest_framework.decorators import api_view
+from django.http import HttpResponse
 
 
+
+
+
+@api_view()
 def index(request):
     return render_to_response('news2/news.html', RequestContext(request))
 
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    #permission_classes = (IsOwnerOrReadOnly,)
 
-    #def pre_save(self, obj):
-        #obj.owner = self.request.user
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
