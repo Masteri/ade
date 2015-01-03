@@ -16,6 +16,7 @@ from news.permissions import *
 from rest_framework import renderers, response
 from rest_framework.decorators import api_view
 
+
 class SnewsViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
@@ -55,23 +56,18 @@ class SimpleStaticView(TemplateView):
 
 
 
-class NewsDet(generics.RetrieveUpdateDestroyAPIView):
-    model = News
-    serializer_class = NewsSerializer
-    permission_classes = [
-        permissions.AllowAny
-    ]
+
 
 
 class NewsList(ListView):
     model = News
-    #queryset = News.objects.get(pk=1)
+    #queryset = News.objects.get.all()
     #serializer_class = NewsSerializer
 
 
 
 def index(request):
-    return render_to_response('news2/news.html', RequestContext(request))
+    return render_to_response('news.html', RequestContext(request))
 
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
